@@ -3,6 +3,10 @@ user  {{ nginx_user }};
 error_log  {{ nginx_error_log }};
 pid        {{ nginx_pidfile }};
 
+{% if ansible_distribution == 'Debian'  %}
+include /etc/nginx/modules-enabled/*.conf;
+{% endif %}
+
 {% block worker %}
 worker_processes  {{ nginx_worker_processes }};
 {% endblock %}
